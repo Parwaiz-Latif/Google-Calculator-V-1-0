@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Calculator-Google</title>
+<link href="css/styles.css" rel="stylesheet"/>
+
+
+</head>
+
+<body>
+<h1>Google Calculator - Version-1.0</h1>
+
+<div id="calc">
+<div id="sdisp">
+<input type="text" id="disps" value=""/>
+</div>
+<div id="mdisp">
+<input type="text" id="disp" value=""/>
+</div>
+<div id="btns">
+<table>
+    <tr>
+        <td>
+            <button id="rad" class="inactive" >Rad</button>
+            <button id="deg" class="active" >Deg</button>
+            <button id="facto" value="!" onClick="scoper(this.value);">X!</button>
+            <button id="lpar" value="(">(</button>
+            <button id="rpar" value=")">)</button>
+            <button id="perc" value="%" onClick="scoper(this.value);">%</button>
+            <button id="clea" value="cl" onClick="scoper(this.value);">AC</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="inv">Inv</button>
+            <button id="sin" value="sin" onClick="scoper(this.value);">sin</button>
+            <button id="logn" value="ln" onClick="scoper(this.value);">ln</button>
+            <button id="seven" value="7" class="wcol" onClick="display(this.value);">7</button>
+            <button id="eight" value="8" class="wcol" onClick="display(this.value);">8</button>
+            <button id="nine" value="9" class="wcol"onClick="display(this.value);" >9</button>
+            <button id="divide" value="/" class="icol" onclick="oper(this.value);">&divide;</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="pie" value="pi" onClick="scoper(this.value);">&pi;</button>
+            <button id="cos" value="cos" onClick="scoper(this.value);">cos</button>
+            <button id="log" value="log" onClick="scoper(this.value);">log</button>
+            <button id="four" value="4" class="wcol" onClick="display(this.value);" >4</button>
+            <button id="five" value="5" class="wcol" onClick="display(this.value);">5</button>
+            <button id="six" value="6" class="wcol" onClick="display(this.value);">6</button>
+            <button id="mul" value="*" class="icol" onclick="oper(this.value);">x</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="e" value="e" onclick="scoper(this.value);">e</button>
+            <button id="tan" value="tan" onClick="scoper(this.value);">tan</button>
+            <button id="sqrt" value="sqrt" onClick="scoper(this.value);">&radic;</button>
+            <button id="one" value="1" class="wcol" onClick="display(this.value);">1</button>
+            <button id="two" value="2" class="wcol" onClick="display(this.value);">2</button>
+            <button id="three" value="3" class="wcol" onClick="display(this.value);">3</button>
+            <button id="minus" value="-" class="icol" onclick="oper(this.value);">-</button>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <button id="ans">Ans</button>
+            <button id="exp" value="exp" onclick="scoper(this.value);">EXP</button>
+            <button id="pow" value="pow" onClick="scoper(this.value);">X<sup>y</sup></button>
+            <button id="zero" value="0" class="wcol" onClick="display(this.value);">0</button>
+            <button id="deci" value="." class="wcol" onClick="display(this.value);">.</button>
+            <button id="equl" class="bcol" onclick="equal();">=</button>
+            <button id="plus" value="+" class="icol" onclick="oper(this.value);">+</button>
+        </td>
+    </tr>
+
+
+</table>
+</div>
+
+</div>
+
+
+<script>
+    var firstNum=0
+    var secondNum=0;
+    var op;
+    var result=0;
+    var count=0;
+    var disinfo="";
+    var temp=0;
+    var secdisp="";
+    var sta="";
+
+
+    function display(dispval){
+        disinfo=document.getElementById("disp");
+            if(disinfo.value.length<=19){
+                if(dispval==='.')count++;
+                if(count<=1){
+                  temp=disinfo.value;
+                  disinfo.value+=dispval;
+                }
+                else count=1;
+        }
+
+    }
+
+
+    function oper(opval){
+        firstNum=+disinfo.value;
+        if(isNaN(firstNum))
+            alert("Not a valid numeric input...Try again with a valid numeric value.");
+        else
+        {
+        op=opval;
+        count=0;
+        secdisp=document.getElementById("disps");
+        secdisp.value=firstNum+" "+op;
+        disinfo.value="";
+        }
+    }
+
+    function scoper(dispop){
+        op=dispop;
+        disinfo=document.getElementById("disp");
+        secdisp=document.getElementById("disps");
+        if(disinfo.value===""){
+            switch(op){
+                case '!':
+                secdisp.value="X"+dispop+"(?)= ...Enter a number, press X! or =";
+                break;
+                case '%':
+                secdisp.value="?"+dispop+"(?)= ...Enter a number, press %, enter second number, press =";
+                break;
+                case 'ln':
+                secdisp.value=dispop+"(?)= ...Enter a number, press ln or =";
+                break;
+                case 'log':
+                secdisp.value=dispop+"(?)= ...Enter a number, press log or =";
+                break;
+                case 'sqrt':
+                secdisp.value="√(?)= ...Enter a number, press √ or =";
+                break;
+                case 'pow':
+                secdisp.value="?"+dispop+"(?)= ...Enter a number, press pow, enter second number, press =";
+                break;
+                case 'sin':
+                secdisp.value=dispop+"(?)= ...Enter an angle, press sin or =";
+                break;
+                case 'cos':
+                secdisp.value=dispop+"(?)= ...Enter an angle, press cos or =";
+                break;
+                case 'tan':
+                secdisp.value=dispop+"(?)= ...Enter an angle, press tan or =";
+                break;
+                case 'exp':
+                secdisp.value="?"+dispop+"(?)= ...Enter a number, press EXP, enter second number, press =";
+                break;
+                case 'pi':
+                secdisp.value=dispop+" = "+Math.PI;
+                disinfo.value=(Math.PI).toFixed(2);
+                break;
+                case 'e':
+                secdisp.value=dispop+"(?)= ...Enter a number, press e or =";
+                break;
+
+
+
+
+                default:
+                ;
+                }
+
+                }else
+            switch(op){
+                case '!':
+                equal();
+                break;
+                case '%':
+                firstNum=+document.getElementById('disp').value;
+                document.getElementById("disp").value="";
+                secdisp.value=dispop+"(?)= ...Enter a number, press =";
+                break;
+                case 'ln':
+                equal();
+                break;
+                case 'log':
+                equal();
+                break;
+                case 'sqrt':
+                equal();
+                break;
+                case 'pow':
+                firstNum=+document.getElementById('disp').value;
+                document.getElementById("disp").value="";
+                secdisp.value=dispop+"(?)= ...Enter a number, press =";
+                break;
+                case 'sin':
+                equal();
+                break;
+                case 'cos':
+                equal();
+                break;
+                case 'tan':
+                equal();
+                break;
+                case 'exp':
+                firstNum=+document.getElementById('disp').value;
+                document.getElementById("disp").value="";
+                secdisp.value=dispop+"(?)= ...Enter a number, press =";
+                break;
+                case 'e':
+                equal();
+                break;
+                case 'cl':
+                disinfo.value="";
+                secdisp.value="";
+                break;
+                }
+            }
+
+
+    function fact(fNum){
+        var fac=1;
+        for(var i=fNum; i>=1; i--)
+        fac*=i;
+        return(fac);
+
+    }
+
+function equal(){
+        secondNum=disinfo.value;
+        secdisp=document.getElementById("disps");
+        switch(op){
+                case '+':
+                result=firstNum+(+secondNum);
+                secdisp.value=firstNum+" + "+secondNum+" = "+result;
+                break;
+                case '-':
+                result=firstNum-(+secondNum);
+                secdisp.value=firstNum+" - "+secondNum+" = "+result;
+                break;
+                case '*':
+                result=firstNum*(+secondNum);
+                secdisp.value=firstNum+" * "+secondNum+" = "+result;
+                break;
+                case '/':
+                result=firstNum/(+secondNum);
+                secdisp.value=firstNum+" / "+secondNum+" = "+result;
+                break;
+                case '!':
+                result=fact(secondNum);
+                secdisp.value=secondNum+"! = "+result;
+                break;
+                case '%':
+                result=(firstNum*secondNum)/100;
+                secdisp.value="("+firstNum+")%of("+secondNum+") = "+result;
+                break;
+                case 'ln':
+                result=Math.log(secondNum);
+                secdisp.value="ln("+secondNum+") = "+result;
+                break;
+                case 'log':
+                result=Math.log10(secondNum);
+                secdisp.value="log("+secondNum+") = "+result;
+                break;
+                case 'sqrt':
+                result=Math.sqrt(secondNum);
+                secdisp.value="√"+secondNum+" = "+result;
+                break;
+                case "pow":
+                result=Math.pow(firstNum,secondNum);
+                secdisp.value="("+firstNum+")POW("+secondNum+") = "+result;
+                break;
+                case 'sin':
+                result=Math.sin((secondNum*Math.PI)/180);
+                secdisp.value="sin("+secondNum+") = "+result;
+                break;
+                case 'cos':
+                result=Math.cos((secondNum*Math.PI)/180);
+                secdisp.value="cos("+secondNum+") = "+result;
+                break;
+                case 'tan':
+                result=Math.tan((secondNum*Math.PI)/180);
+                secdisp.value="tan("+secondNum+") = "+result;
+                break;
+                case 'exp':
+                result=firstNum*Math.pow(10,secondNum);
+                secdisp.value="("+firstNum+")EXP("+secondNum+") = "+result;
+                break;
+                case 'e':
+                result=Math.exp(secondNum);
+                secdisp.value="e("+secondNum+") = "+result;
+                break;
+
+                default:
+                ;
+                }
+        disinfo.value=result.toFixed(2);
+        op="ERR";
+}
+
+</script>
+
+
+
+
+
+
+</body>
+</html>
